@@ -1,6 +1,7 @@
 <template>
   <div class="chat-input">
     <input type="text" class="input-text"/>
+    <button class="btn">Send</button>
   </div>
 </template>
 
@@ -19,9 +20,11 @@
     height: 70px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: 0px 50px;
 
     .input-text {
-      width: 90%;
+      flex: 7;
       height: 40px;
       border-radius: 10px;
       outline: 0;
@@ -32,8 +35,21 @@
     }
 
     .btn {
-      width: 100px;
+      flex: 1;
       height: 30px;
+      margin-left: 20px;
+      border: 0;
+      background: #9ab4ea;
+      border-radius: 5px;
+      height: 40px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      font-size: 15px;
+    }
+
+    .btn:hover {
+      background: #a89ec1;
     }
 
   }
