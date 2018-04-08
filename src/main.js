@@ -7,18 +7,3 @@ new Vue({
   render: h => h(App),
   store
 })
-
-var socket = io();
-
-window.socket = socket;
-
-socket.on('connect', () => {
-  console.log('connected to server');
-});
-
-socket.on('serverMessage', (message) => {
-  console.log(message);
-});
-
-socket.on('userJoin', (message) => {
-});

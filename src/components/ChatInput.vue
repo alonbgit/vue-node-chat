@@ -1,13 +1,32 @@
 <template>
   <div class="chat-input">
-    <input type="text" class="input-text"/>
+    <input type="text" class="input-text" @keypress="onSendMessage"/>
     <button class="btn">Send</button>
   </div>
 </template>
 
 <script>
 
+  import { mapMutations } from 'vuex';
+  import socketManager from './../socketManager';
+
   export default {
+
+    methods: {
+
+      ...mapMutations([
+        'addMessage'
+      ]),
+
+      onSendMessage(e) {
+
+        if (e.keyCode == 13) {
+          this.$emit('sendMessage');
+        }
+
+      }
+
+    }
 
   }
 

@@ -8,23 +8,22 @@
 
   import UserMenuItem from './UserMenuItem.vue';
 
+  import { mapGetters } from 'vuex';
+
   export default {
 
     components: {
       userMenuItem: UserMenuItem
     },
 
-    data() {
-      return {
-        users: [
-          {
-            name: 'Alon'
-          },
-          {
-            name: 'Sam'
-          }
-        ]
-      }
+    created() {
+
+    },
+
+    computed: {
+      ...mapGetters([
+        'users'
+      ])
     }
 
   }

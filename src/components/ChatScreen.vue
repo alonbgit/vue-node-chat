@@ -9,23 +9,16 @@
 
 <script>
 
+  import { mapGetters } from 'vuex';
+
   export default {
 
-    data() {
-      return {
-        messages: [
-          {
-            name: 'Alon',
-            message: 'How are you?',
-            date: new Date().getTime()
-          },
-          {
-            name: 'Sam',
-            message: 'Fine, and how are you?',
-            date: new Date().getTime()
-          }
-        ]
-      }
+    computed: {
+
+      ...mapGetters([
+        'messages'
+      ])
+
     }
 
   }

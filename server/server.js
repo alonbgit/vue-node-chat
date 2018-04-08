@@ -24,19 +24,37 @@ server.listen(3000, () => {
 io.on('connection', (socket) => {
   console.log('new user connected');
 
-  // send an individual message to the current logged in user - welcome message
-  socket.emit('serverMessage', {
-    from: 'Admin',
-    message: 'Welcome to that chat app'
+  socket.on('disconnect', () => {
+
+    // removes the user from the users list, after the socket has been disconnected
+    var user = users.removeUserBySocketId(socket.id);
+
+    // send all the other users, the user who left
+    socket.broadcast.emit('userLeft', user);
+
   });
 
-  users.addUser();
+  var user = {
+    name: 'SomeUser',
+    socketId: socket.id
+  };
+
+  // adds a new user, when a new socket connection has been established
+  users.addUser(user);
+
+  // send an individual message to the current logged in user - welcome message
+  socket.emit('initServerMessage', {
+    from: 'Admin',
+    message: 'Welcome to that chat app',
+    users: users.users
+  });
 
   // send a message to all logged in users, except current new logged user, that
   // a new user has been joined
   socket.broadcast.emit('userJoin', {
     from: 'Admin',
-    message: 'New user has been joined to the chat'
+    message: 'New user has been joined to the chat',
+    user
   });
 
   // listen to the client messages, and send them to all of the user, except of them

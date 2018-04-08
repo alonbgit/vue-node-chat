@@ -3,7 +3,7 @@
     <users-menu class="users-menu"/>
     <div class="chat">
       <chat-screen class="chat-screen"/>
-      <chat-input/>
+      <chat-input @sendMessage="onSendMessage"/>
     </div>
   </div>
 </template>
@@ -14,12 +14,34 @@
   import ChatScreen from './components/ChatScreen.vue';
   import ChatInput from './components/ChatInput';
 
+  import socketManager from './socketManager';
+
   export default {
 
     components: {
       usersMenu: UsersMenu,
       chatScreen: ChatScreen,
       chatInput: ChatInput
+    },
+
+    created() {
+      this.socket = new socketManager();
+    },
+
+    methods: {
+
+      onSendMessage() {
+        socketManager.sendMessage({
+          message: e.target.value
+        }).then((result) => {
+          if (result) {
+            this.addMessage({
+              message: e.target.value
+            });
+          }
+        });
+      }
+
     }
 
   }
