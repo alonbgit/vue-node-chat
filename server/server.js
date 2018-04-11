@@ -59,11 +59,12 @@ io.on('connection', (socket) => {
 
   // listen to the client messages, and send them to all of the user, except of them
   // current logged in user
-  socket.on('clientMessage', (message) => {
+  socket.on('clientMessage', (message, callback) => {
     socket.broadcast.emit('serverMessage', {
       from: 'Admin',
       message: message.message
     });
+    callback(true);
   });
 
 });

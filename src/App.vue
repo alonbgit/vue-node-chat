@@ -15,6 +15,7 @@
   import ChatInput from './components/ChatInput';
 
   import socketManager from './socketManager';
+  import { mapMutations } from 'vuex';
 
   export default {
 
@@ -30,15 +31,17 @@
 
     methods: {
 
-      onSendMessage() {
-        socketManager.sendMessage({
-          message: e.target.value
-        }).then((result) => {
-          if (result) {
-            this.addMessage({
-              message: e.target.value
-            });
-          }
+      ...mapMutations([
+        'addMessage'
+      ]),
+
+      onSendMessage(message) {
+        this.socket.sendMessage({
+          message: message
+        }).then(() => {
+          this.addMessage({
+            message: message
+          });
         });
       }
 

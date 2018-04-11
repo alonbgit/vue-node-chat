@@ -20,7 +20,7 @@ class socketManager {
     });
 
     this.socket.on('serverMessage', (message) => {
-      console.log(message);
+      store.commit('addMessage', message);
     });
 
     this.socket.on('userJoin', (message) => {
@@ -37,7 +37,7 @@ class socketManager {
 
   sendMessage(message) {
     return new Promise((resolve, reject) => {
-      this.socket.broadcast.emit('clientMessage', message, (result) => {
+      this.socket.emit('clientMessage', message, (result) => {
         if (result)
           resolve();
         else

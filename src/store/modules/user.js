@@ -44,7 +44,6 @@ const mutations = {
   },
 
   addMessage(state, message) {
-    debugger;
     state.messages.push(message);
   }
 

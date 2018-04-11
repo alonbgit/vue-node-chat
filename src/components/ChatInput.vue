@@ -1,6 +1,6 @@
 <template>
   <div class="chat-input">
-    <input type="text" class="input-text" @keypress="onSendMessage"/>
+    <input type="text" class="input-text" @keypress="onSendMessage" v-model="message"/>
     <button class="btn">Send</button>
   </div>
 </template>
@@ -12,6 +12,12 @@
 
   export default {
 
+    data() {
+      return {
+        message: ''
+      }
+    },
+
     methods: {
 
       ...mapMutations([
@@ -21,7 +27,8 @@
       onSendMessage(e) {
 
         if (e.keyCode == 13) {
-          this.$emit('sendMessage');
+          this.$emit('sendMessage', this.message);
+          this.message = '';
         }
 
       }
