@@ -29,4 +29,9 @@
 
   }
 
+  .user-menu-item:hover {
+    background: #c8edf7;
+    cursor: pointer;
+  }
+
 </style>
