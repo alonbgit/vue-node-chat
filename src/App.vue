@@ -15,7 +15,7 @@
   import ChatInput from './components/ChatInput';
 
   import socketManager from './socketManager';
-  import { mapMutations } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
 
   export default {
 
@@ -27,6 +27,14 @@
 
     created() {
       this.socket = new socketManager();
+    },
+
+    computed: {
+
+      ...mapGetters([
+        'isLoggedIn'
+      ])
+
     },
 
     methods: {
